@@ -1,0 +1,22 @@
+{
+  "name": "bluetooth-demo",
+  "description": "Experiment with Bluetooth",
+  "version": "0.0.1",
+  "homepage": "https://github.com/gmarty/bluetooth-demo",
+  "authors": [
+    "Guillaume Marty <gmarty@mozilla.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "!.jshintrc",
+    "node_modules",
+    "package.json",
+    "README.md"
+  ],
+  "dependencies": {
+    "fxos-mvc": "git@github.com:fxos/mvc.git"
+  },
+  "devDependencies": {}
+}
