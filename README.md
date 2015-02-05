@@ -1,4 +1,4 @@
-# Bluetooth demo
+# ![Bluetooth demo](https://raw.githubusercontent.com/gmarty/bluetooth-demo/master/app/img/icons/32.png "Bluetooth demo") Bluetooth demo
 
 Experiment with Bluetooth
 
