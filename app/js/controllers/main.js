@@ -1,5 +1,7 @@
 import { Controller } from 'components/fxos-mvc/dist/mvc';
 
+import HomeController from 'js/controllers/home';
+
 import Settings from 'js/models/settings';
 
 var bluetoothManager = navigator.mozBluetooth;
@@ -16,7 +18,9 @@ class MainController extends Controller {
 
     this.settings = new Settings();
 
-    this.controllers = {};
+    this.controllers = {
+      home: new HomeController()
+    };
     this.adapter = null;
 
     this.init();
@@ -163,8 +167,11 @@ class MainController extends Controller {
       case 'adapteradded':
         break;
 
-      case 'devicefound':
       case 'discoverystatechanged':
+        this.controllers.home.view.discovering.classList.toggle('not', !this.adapter.discovering);
+        break;
+
+      case 'devicefound':
       case 'pairedstatuschanged':
       case 'a2dpstatuschanged':
       case 'hfpstatuschanged':
