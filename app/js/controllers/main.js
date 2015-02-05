@@ -19,7 +19,7 @@ class MainController extends Controller {
     this.settings = new Settings();
 
     this.controllers = {
-      home: new HomeController()
+      home: new HomeController({settings: this.settings})
     };
     this.adapter = null;
 
@@ -37,8 +37,6 @@ class MainController extends Controller {
 
   main() {
     console.log('MainController#main()');
-
-    console.log('bluetoothManager.enabled', bluetoothManager.enabled);
 
     this.enable();
     this.setActiveController('home');
@@ -76,8 +74,6 @@ class MainController extends Controller {
 
   getDefaultAdapter() {
     console.log('MainController#getDefaultAdapter()');
-
-    console.log('bluetoothManager.enabled', bluetoothManager.enabled);
 
     var req = bluetoothManager.getDefaultAdapter();
 
@@ -168,10 +164,24 @@ class MainController extends Controller {
         break;
 
       case 'discoverystatechanged':
-        this.controllers.home.view.discovering.classList.toggle('not', !this.adapter.discovering);
+        this.controllers.home.view.discovering.classList.toggle('not', !evt.discovering);
         break;
 
       case 'devicefound':
+        var device = {
+          address: evt.device.address,
+          'class': evt.device.class,
+          connected: evt.device.connected,
+          icon: evt.device.icon,
+          name: evt.device.name,
+          paired: evt.device.paired
+        };
+
+        this.settings.peers.push(device);
+        // @todo Fix it. The observer should work here.
+        this.controllers.home.view.renderPeer(this.settings.peers);
+        break;
+
       case 'pairedstatuschanged':
       case 'a2dpstatuschanged':
       case 'hfpstatuschanged':

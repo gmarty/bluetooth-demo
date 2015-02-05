@@ -4,7 +4,8 @@ export default
 class Settings extends Model {
   constructor() {
     var properties = {
-      deviceName: ''
+      deviceName: '',
+      peers: []
     };
     super(properties);
 

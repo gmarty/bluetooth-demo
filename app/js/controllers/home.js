@@ -11,6 +11,12 @@ class HomeController extends Controller {
       el: document.getElementById('home')
     });
     super(options);
+
+    // Observe new peers and update the view accordingly.
+    // @todo Fix me. Currently not working for some obscure reasons.
+    this.settings.on('peers', () => {
+      this.view.renderPeer(this.settings.peers);
+    });
   }
 
   main() {

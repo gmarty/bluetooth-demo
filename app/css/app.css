@@ -6,7 +6,6 @@ html, body {
 
 body {
   background: #fff;
-  overflow: hidden;
   font-size: 2rem;
 }
 
@@ -32,10 +31,6 @@ h1 {
 }
 
 /* Home view */
-#discovering {
-
-}
-
 #discovering:before {
   content: "✓";
   color: darkgreen;
@@ -44,4 +39,28 @@ h1 {
 #discovering.not:before {
   content: "✗";
   color: darkred;
+}
+
+input[type="button"] {
+  font-size: 2rem;
+  font-weight: 300;
+  color: white;
+  background: darkslategrey;
+  border-top: 1px solid white;
+  border-right: 1px solid white;
+  border-radius: 0;
+  width: 50vw;
+  height: 50vw;
+  margin: 0;
+  padding: 0;
+  float: left;
+  transition: 150ms;
+}
+
+input[data-address] {
+  background: deeppink;
+}
+
+input[data-address]:active {
+  background: hotpink;
 }
