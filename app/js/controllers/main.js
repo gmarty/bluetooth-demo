@@ -58,41 +58,34 @@ class MainController extends Controller {
   enable() {
     console.log('MainController#enable()');
 
-    var lock = navigator.mozSettings.createLock();
-    var req = lock.set({
-      'bluetooth.enabled': true
-    });
-
-    req.onsuccess = () => {
-      this.getDefaultAdapter();
-    };
-
-    req.onerror = evt => {
-      displayError(evt.target.error);
-    };
+    navigator.mozSettings.createLock().set({'bluetooth.enabled': true})
+      .then(() => {
+        console.log('mozSettings#createLock().then()');
+      })
+      .catch(displayError);
   }
 
   getDefaultAdapter() {
     console.log('MainController#getDefaultAdapter()');
 
-    var req = bluetoothManager.getDefaultAdapter();
+    bluetoothManager.getDefaultAdapter()
+      .then((result) => {
+        console.log('bluetoothManager#getDefaultAdapter().then()');
 
-    req.onsuccess = evt => {
-      console.log('bluetoothManager#getDefaultAdapter().onsuccess');
+        if (!result) {
+          displayError(new Error('Cannot get default adapter.'));
+          return;
+        }
 
-      this.setDefaultAdapter(evt.target.result);
-    };
-
-    req.onerror = evt => {
-      displayError(evt.target.error);
-    };
+        this.setDefaultAdapter(result);
+      })
+      .catch(displayError);
   }
 
   setDefaultAdapter(adapter) {
     console.log('MainController#setDefaultAdapter()');
 
     this.adapter = adapter;
-    window.adapter = adapter;
 
     // Attach event listeners.
     this.adapter.addEventListener('devicefound', this);
@@ -116,17 +109,11 @@ class MainController extends Controller {
       return;
     }
 
-    var req = this.adapter.setName(this.settings.deviceName);
-
-    req.onsuccess = evt => {
-      console.log('BluetoothAdapter#setName().onsuccess');
-
-      console.log(evt);
-    };
-
-    req.onerror = evt => {
-      displayError(evt.target.error);
-    };
+    this.adapter.setName(this.settings.deviceName)
+      .then(() => {
+        console.log('BluetoothAdapter#setName().then()');
+      })
+      .catch(displayError);
   }
 
   startDiscovery() {
@@ -138,17 +125,11 @@ class MainController extends Controller {
 
     this.settings.peers = [];
 
-    var req = this.adapter.startDiscovery();
-
-    req.onsuccess = evt => {
-      console.log('BluetoothAdapter#startDiscovery().onsuccess');
-
-      console.log(evt);
-    };
-
-    req.onerror = evt => {
-      displayError(evt.target.error);
-    };
+    this.adapter.startDiscovery()
+      .then(() => {
+        console.log('BluetoothAdapter#startDiscovery().then()');
+      })
+      .catch(displayError);
   }
 
   /**
@@ -161,6 +142,9 @@ class MainController extends Controller {
 
     switch (evt.type) {
       case 'enabled':
+        this.getDefaultAdapter();
+        break;
+
       case 'disabled':
       case 'adapteradded':
         break;
