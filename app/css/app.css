@@ -41,7 +41,8 @@ h1 {
   color: darkred;
 }
 
-input[type="button"] {
+input[type="button"],
+[data-address] {
   font-size: 2rem;
   font-weight: 300;
   color: white;
@@ -49,18 +50,141 @@ input[type="button"] {
   border-top: 1px solid white;
   border-right: 1px solid white;
   border-radius: 0;
-  width: 50vw;
+  width: calc(50vw - 1px);
   height: 50vw;
   margin: 0;
   padding: 0;
   float: left;
   transition: 150ms;
+  text-align: center;
+  line-height: 45vw;
+  word-break: break-all;
 }
 
-input[data-address] {
+[data-address] {
   background: deeppink;
 }
 
-input[data-address]:active {
+[data-address]:active {
   background: hotpink;
+}
+
+/* Device type icons */
+[data-icon] {
+  position: relative;
+}
+
+[data-icon]:after {
+  content: "";
+  width: 3rem;
+  height: 3rem;
+  background: url(../img/bluetooth_sprite.png);
+  position: absolute;
+  right: 20vw;
+  top: 28vw;
+}
+
+[data-icon="audio-card"]:after {
+  background-position: 0 0;
+}
+
+[data-icon="audio-input-microphone"]:after {
+  background-position: -3rem 0;
+}
+
+[data-icon="battery"]:after {
+  background-position: -6rem 0;
+}
+
+[data-icon="camera-photo"]:after {
+  background-position: -9rem 0;
+}
+
+[data-icon="camera-video"]:after {
+  background-position: -12rem 0;
+}
+
+[data-icon="camera-web"]:after {
+  background-position: -15rem 0;
+}
+
+[data-icon="computer"]:after {
+  background-position: -18rem 0;
+}
+
+[data-icon="drive-harddisk"]:after {
+  background-position: -21rem 0;
+}
+
+[data-icon="drive-optical"]:after {
+  background-position: -24rem 0;
+}
+
+[data-icon="drive-removable-media"]:after {
+  background-position: -27rem 0;
+}
+
+[data-icon="input-gaming"]:after {
+  background-position: -30rem 0;
+}
+
+[data-icon="input-keyboard"]:after {
+  background-position: -33rem 0;
+}
+
+[data-icon="input-mouse"]:after {
+  background-position: -36rem 0;
+}
+
+[data-icon="input-tablet"]:after {
+  background-position: 0 -3rem;
+}
+
+[data-icon="media-flash"]:after {
+  background-position: -3rem -3rem;
+}
+
+[data-icon="media-floppy"]:after {
+  background-position: -6rem -3rem;
+}
+
+[data-icon="media-optical"]:after {
+  background-position: -9rem -3rem;
+}
+
+[data-icon="media-tape"]:after {
+  background-position: -12rem -3rem;
+}
+
+[data-icon="modem"]:after {
+  background-position: -15rem -3rem;
+}
+
+[data-icon="multimedia-player"]:after {
+  background-position: -18rem -3rem;
+}
+
+[data-icon="network-wired"]:after {
+  background-position: -21rem -3rem;
+}
+
+[data-icon="network-wireless"]:after {
+  background-position: -24rem -3rem;
+}
+
+[data-icon="pda"]:after,
+[data-icon="phone"]:after {
+  background-position: -27rem -3rem;
+}
+
+[data-icon="printer"]:after {
+  background-position: -30rem -3rem;
+}
+
+[data-icon="scanner"]:after {
+  background-position: -33rem -3rem;
+}
+
+[data-icon="video-display"]:after {
+  background-position: -36rem -3rem;
 }

@@ -11,12 +11,14 @@ var noPeersTemplate = `
   `;
 
 var peersTemplate = peer => `
-  <input type="button" value="${peer.name}"
-  data-name="${peer.name}"
-  data-address="${peer.address}"
-  data-paired="${peer.paired}"
-  data-connected="${peer.connected}"
-  data-class="${peer.class}">
+  <div
+    data-address="${peer.address}"
+    data-class="${peer.class}"
+    data-connected="${peer.connected}"
+    data-icon="${peer.icon}"
+    data-name="${peer.name}"
+    data-paired="${peer.paired}"
+  >${peer.name}</div>
   `;
 
 export default
