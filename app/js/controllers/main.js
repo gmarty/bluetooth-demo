@@ -105,28 +105,8 @@ class MainController extends Controller {
 
     console.log(this.adapter);
 
-    this.startDiscovery();
     this.setDeviceName();
-  }
-
-  startDiscovery() {
-    console.log('MainController#startDiscovery()');
-
-    if (!this.adapter) {
-      return;
-    }
-
-    var req = this.adapter.startDiscovery();
-
-    req.onsuccess = evt => {
-      console.log('BluetoothAdapter#startDiscovery().onsuccess');
-
-      console.log(evt);
-    };
-
-    req.onerror = evt => {
-      displayError(evt.target.error);
-    };
+    this.startDiscovery();
   }
 
   setDeviceName() {
@@ -140,6 +120,28 @@ class MainController extends Controller {
 
     req.onsuccess = evt => {
       console.log('BluetoothAdapter#setName().onsuccess');
+
+      console.log(evt);
+    };
+
+    req.onerror = evt => {
+      displayError(evt.target.error);
+    };
+  }
+
+  startDiscovery() {
+    console.log('MainController#startDiscovery()');
+
+    if (!this.adapter) {
+      return;
+    }
+
+    this.settings.peers = [];
+
+    var req = this.adapter.startDiscovery();
+
+    req.onsuccess = evt => {
+      console.log('BluetoothAdapter#startDiscovery().onsuccess');
 
       console.log(evt);
     };
@@ -176,6 +178,10 @@ class MainController extends Controller {
           name: evt.device.name,
           paired: evt.device.paired
         };
+
+        if (!device.name) {
+          device.name = '[No name]';
+        }
 
         this.settings.peers.push(device);
         // @todo Fix it. The observer should work here.
