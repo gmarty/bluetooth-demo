@@ -4,6 +4,8 @@ import HomeController from 'js/controllers/home';
 
 import Settings from 'js/models/settings';
 
+import /* global _ */ 'components/lodash/lodash.min';
+
 var bluetoothManager = navigator.mozBluetooth;
 
 var displayError = error => {
@@ -168,8 +170,10 @@ class MainController extends Controller {
         }
 
         this.settings.peers.push(device);
-        // @todo Fix it. The observer should work here.
-        this.controllers.home.view.renderPeer(this.settings.peers);
+
+        // There's no such event as `devicelost` so we need to dedupe in case
+        // a peer is found several times.
+        this.settings.peers = _.uniq(this.settings.peers, peer => peer.address);
         break;
 
       case 'pairedstatuschanged':

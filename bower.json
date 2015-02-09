@@ -16,7 +16,8 @@
     "README.md"
   ],
   "dependencies": {
-    "fxos-mvc": "git@github.com:fxos/mvc.git"
+    "fxos-mvc": "git@github.com:fxos/mvc.git",
+    "lodash": "~3.1.0"
   },
   "devDependencies": {}
 }
