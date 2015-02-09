@@ -1,13 +1,12 @@
 import { View } from 'components/fxos-mvc/dist/mvc';
 
 var template = `
-  <h1>Bluetooth</h1>
-  <div id="discovering" class="not">Discovering</div>
+  <button id="discover">Search<br/><div class="small progress" hidden><div>Loading…</div></div></button>
   <div id="peers"></div>
   `;
 
 var noPeersTemplate = `
-  <input type="button" value="No peers around">
+  <div class="no-peers">No peers around</div>
   `;
 
 var peersTemplate = peer => `
@@ -35,7 +34,8 @@ class HomeView extends View {
     super(controller);
     this.render();
 
-    this.discovering = this.$('#discovering');
+    this.discover = this.$('#discover');
+    this.loader = this.$('.progress');
     this.peersList = this.$('#peers');
 
     this.renderPeer();

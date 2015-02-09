@@ -25,28 +25,20 @@ body > section.active {
   opacity: 1;
 }
 
-h1 {
-  margin: 0 0 1rem 0;
-  color: deeppink;
+[hidden] {
+  opacity: 0;
 }
 
 /* Home view */
-#discovering:before {
-  content: "✓";
-  color: darkgreen;
-}
-
-#discovering.not:before {
-  content: "✗";
-  color: darkred;
-}
-
-input[type="button"],
+#discover,
+.no-peers,
 [data-address] {
+  position: relative;
   font-size: 2rem;
   font-weight: 300;
   color: white;
   background: darkslategrey;
+  border: none;
   border-top: 1px solid white;
   border-right: 1px solid white;
   border-radius: 0;
@@ -59,6 +51,14 @@ input[type="button"],
   text-align: center;
   line-height: 45vw;
   word-break: break-all;
+}
+
+#discover {
+  background: hotpink;
+}
+
+#discover:active {
+  background: lightpink;
 }
 
 [data-address] {
@@ -187,4 +187,71 @@ input[type="button"],
 
 [data-icon="video-display"]:after {
   background-position: -36rem -3rem;
+}
+
+/**
+ * (C)Leanest CSS spinner ever
+ */
+
+@keyframes spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+.progress {
+  display: inline-block;
+  width: 5em;
+  height: 5em;
+  margin: 0 .5em;
+  font-size: 12px;
+  text-indent: 999em;
+  overflow: hidden;
+  animation: spin 1s infinite steps(8);
+
+  position: absolute;
+  top: 32vw;
+  left: calc(50% - 15px);
+  z-index: 8;
+  transition: opacity 500ms;
+}
+
+.small.progress {
+  font-size: .5rem;
+}
+
+.progress:before,
+.progress:after,
+.progress > div:before,
+.progress > div:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 2.25em; /* (container width - part width)/2  */
+  width: .5em;
+  height: 1.5em;
+  border-radius: .2em;
+  background: #fff;
+  opacity: 1;
+  box-shadow: 0 3.5em #eee; /* container height - part height */
+  transform-origin: 50% 2.5em; /* container height / 2 */
+}
+
+.progress:before {
+  opacity: .2;
+}
+
+.progress:after {
+  transform: rotate(-45deg);
+  opacity: .4;
+}
+
+.progress > div:before {
+  transform: rotate(-90deg);
+  opacity: .6;
+}
+
+.progress > div:after {
+  transform: rotate(-135deg);
+  opacity: .8;
 }

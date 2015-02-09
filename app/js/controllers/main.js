@@ -35,6 +35,7 @@ class MainController extends Controller {
     bluetoothManager.addEventListener('enabled', this);
     bluetoothManager.addEventListener('disabled', this);
     bluetoothManager.addEventListener('adapteradded', this);
+    this.controllers.home.view.discover.addEventListener('click', this);
   }
 
   main() {
@@ -152,7 +153,12 @@ class MainController extends Controller {
         break;
 
       case 'discoverystatechanged':
-        this.controllers.home.view.discovering.classList.toggle('not', !evt.discovering);
+        if (evt.discovering) {
+          this.controllers.home.view.loader.hidden = false;
+          break;
+        }
+
+        this.controllers.home.view.loader.hidden = true;
         break;
 
       case 'devicefound':
@@ -181,6 +187,18 @@ class MainController extends Controller {
       case 'hfpstatuschanged':
       case 'scostatuschanged':
       case 'requestmediaplaystatus':
+        break;
+
+      case 'click':
+        switch (evt.target) {
+          case this.controllers.home.view.discover:
+            if (this.adapter.discovering) {
+              break;
+            }
+
+            this.startDiscovery();
+            break;
+        }
         break;
     }
   }
