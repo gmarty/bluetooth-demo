@@ -85,8 +85,12 @@ class MainController extends Controller {
       .catch(displayError);
   }
 
-  setDefaultAdapter(adapter) {
+  setDefaultAdapter(adapter = null) {
     console.log('MainController#setDefaultAdapter()');
+
+    if (!adapter) {
+      return;
+    }
 
     this.adapter = adapter;
 
