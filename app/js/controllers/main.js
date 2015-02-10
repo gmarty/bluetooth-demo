@@ -102,6 +102,7 @@ class MainController extends Controller {
     console.log(this.adapter);
 
     this.setDeviceName();
+    this.setDiscoverable();
     this.startDiscovery();
   }
 
@@ -115,6 +116,20 @@ class MainController extends Controller {
     this.adapter.setName(this.settings.deviceName)
       .then(() => {
         console.log('BluetoothAdapter#setName().then()');
+      })
+      .catch(displayError);
+  }
+
+  setDiscoverable() {
+    console.log('MainController#setDiscoverable()');
+
+    if (!this.adapter) {
+      return;
+    }
+
+    this.adapter.setDiscoverable(true)
+      .then(() => {
+        console.log('BluetoothAdapter#setDiscoverable().then()');
       })
       .catch(displayError);
   }
